@@ -8,6 +8,18 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Link, usePage } from '@inertiajs/vue3'
+import { useForm } from '@inertiajs/vue3';
+
+const form = useForm({});
+
+const logout = () => {
+    form.post('/logout', {
+        onError: (error) => {
+            errors.value = error;
+        }
+    })
+}
+
 </script>
 
 <template>
@@ -192,7 +204,7 @@ import { Link, usePage } from '@inertiajs/vue3'
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem @click="logout">Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </header>
